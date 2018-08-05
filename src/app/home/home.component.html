@@ -1,0 +1,27 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav class="sidenav mat-elevation-z16" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
+    <mat-toolbar color="primary">Menu</mat-toolbar>
+    <!-- Navigation list -->
+    <mat-nav-list>
+      <mat-list-item *ngFor="let user of users|async">
+        <a matLine [routerLink]="['',user.id]">
+          <mat-icon svgIcon="{{user.avatar}}"></mat-icon> {{ user.name }}
+        </a>
+      </mat-list-item>
+    </mat-nav-list>
+    <!-- Navigation list -->
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>angular-material</span>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <div class="container-fluid">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
